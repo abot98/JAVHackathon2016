@@ -1,13 +1,11 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
-
 import android.os.Build;
 import android.os.Bundle;
-
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -92,6 +90,7 @@ import android.widget.TextView;
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+			@SuppressLint("NewApi") //IMPORTANTE SUPPRESSED CUZ LAPTOP IS PMSing
 			@Override
               public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);

@@ -2,11 +2,10 @@ package com.example.atomhacks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +20,8 @@ import android.widget.ListView;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class UserList extends Activity {
 	
 		Button switchToProjects;
+		Intent toUserInfo; 
+		String name, email, skills; 
 		
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -88,17 +89,14 @@ import android.widget.ListView;
 
 	            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-	              @Override
+				@Override
 	              public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
 	                final String item = (String) parent.getItemAtPosition(position);
-	                view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
-	                      @Override
-	                      public void run() {
-	                        list.remove(item);
-	                        userAdapter.notifyDataSetChanged();
-	                        view.setAlpha(1);
-	                      }
-	                    });
+	                toUserInfo = new Intent(UserList.this, UserInfo.class);
+	                name = item; 
+	                toUserInfo.putExtra("Name", name); 
+	                toUserInfo.putExtra("Email", email); 
+	                startActivity(toUserInfo); 
 	              }
 
 	            });

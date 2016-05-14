@@ -40,6 +40,7 @@ public class UserInfo extends Activity {
             	
             	//Fill in the info (first name, last name, etc here)
             	
+            	
             }
 
 			@Override
