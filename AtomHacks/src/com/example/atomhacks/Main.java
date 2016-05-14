@@ -2,14 +2,25 @@ package com.example.atomhacks;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+//import com.google.android.gms.auth.signin.GoogleSignInOptions.Builder;
 
 public class Main extends Activity {
 
+	private static boolean loggedIn = false;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        Intent logIn = new Intent(Main.this, Login.class);
+        
+        //If user isn't signed in, goes to the login screen
+        if (loggedIn = false){
+        	startActivity(logIn);
+        }
     }
 
 
@@ -20,4 +31,8 @@ public class Main extends Activity {
         return true;
     }
     
+    
+    public static void setLogin(boolean status){
+    	loggedIn = status;
+    }
 }
