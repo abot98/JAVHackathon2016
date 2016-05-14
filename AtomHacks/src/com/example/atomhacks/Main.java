@@ -22,9 +22,6 @@ import android.widget.TextView;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
 	Button switchToUsers, logout, newProject;
-	Button switchToUsers;
-	Button UserSettings;
-	Button logout;
 	
 	public static Firebase dataRef;
 	public static String userID = "";
@@ -95,7 +92,6 @@ import android.widget.TextView;
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-              @SuppressLint("NewApi")
 			@Override
               public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
