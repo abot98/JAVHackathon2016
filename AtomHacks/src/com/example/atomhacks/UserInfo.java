@@ -3,11 +3,13 @@ package com.example.atomhacks;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class UserInfo extends Activity {
 	Intent getInfo; 
 	TextView line1, line2, line3; 
+	RelativeLayout layout; 
 	String message, description, skills; 
 	
 	@Override
@@ -21,6 +23,10 @@ public class UserInfo extends Activity {
         skills= getInfo.getStringExtra(ProjectSettings.SKILL); 
         
         setAllText(message, description, skills); 
+        layout=(RelativeLayout)findViewById(R.id.content); 
+        layout.addView(line1); 
+        layout.addView(line2); 
+        layout.addView(line3);
     }
 	
 	public void setAllText(String s1, String s2, String s3){
