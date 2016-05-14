@@ -49,4 +49,8 @@ public class UserInfo extends Activity {
 			}
         });
     }
+
+	
+	public void setAllText(String s1, String s2, String s3){
+		line1 = new TextVW PROJECT OBJECT IS ADDED TO PROJECTLIST. 
 }

@@ -1,11 +1,13 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
+
 import android.os.Build;
 import android.os.Bundle;
+
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-import android.annotation.SuppressLint;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +22,9 @@ import android.widget.TextView;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
 	Button switchToUsers, logout, newProject;
+	Button switchToUsers;
+	Button UserSettings;
+	Button logout;
 	
 	public static Firebase dataRef;
 	public static String userID = "";
