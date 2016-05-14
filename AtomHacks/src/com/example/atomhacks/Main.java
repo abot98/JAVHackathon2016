@@ -49,7 +49,7 @@ import android.widget.TextView;
         });
         
       //Retrieve  button
-        switchToUsers = (Button) findViewById(R.id.submitButton);
+        switchToUsers = (Button) findViewById(R.id.users);
         
         //button listener
         switchToUsers.setOnClickListener(new View.OnClickListener() {

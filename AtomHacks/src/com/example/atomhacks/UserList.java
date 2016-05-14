@@ -1,6 +1,11 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -36,10 +41,27 @@ import android.widget.ListView;
 	    
 	        final ListView listview = (ListView) findViewById(R.id.listView);
 	        
-	        String[] values = new String[] { "User 1", "User 2", "User 3",
-	        		"User 4", "User 5", "User 6","User 7", "User 8", 
-	        		"User 9","User 10", "User 11", "User 12","User 13", 
-	        		"User 14", "User 15" };
+	        //Get users
+	        Main.dataRef.child("users").addValueEventListener(new ValueEventListener() {
+
+				@Override
+				public void onCancelled(FirebaseError arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onDataChange(DataSnapshot arg0) {
+					HashMap<String, HashMap<Object, Object>> userList;
+					try {
+						HashMap<String, HashMap<Object, Object>> userList = (HashMap<String, HashMap<Object, Object>>) arg0.getValue();
+					}
+					catch (ClassCastException e) {
+						
+					}
+				}
+	        	
+	        });
 
 	        final ArrayList<String> list = new ArrayList<String>();
 	        for (int i = 0; i < values.length; ++i) {
