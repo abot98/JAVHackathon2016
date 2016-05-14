@@ -10,6 +10,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -91,8 +92,7 @@ public class SignUp extends Activity{
 			//Get current user list and append new user's name and id
 			final HashMap<Object, Object> basicUserInfo = new HashMap<Object, Object>();
 			basicUserInfo.put("User ID", userID);
-			basicUserInfo.put("First Name", firstName.getText().toString());
-			basicUserInfo.put("Last Name", lastName.getText().toString());
+			basicUserInfo.put("Name", firstName.getText().toString() + " " + lastName.getText().toString());
 			Main.dataRef.child(USER).addListenerForSingleValueEvent(new ValueEventListener() {
 			    public void onDataChange(DataSnapshot snapshot) {
 			    	HashMap<String, HashMap<Object, Object>> userList;
@@ -101,8 +101,14 @@ public class SignUp extends Activity{
 			    	} catch (ClassCastException e) {
 			    		userList = new HashMap<String, HashMap<Object, Object>>();
 			    	}
+			    	if (userList == null) {
+			    		userList = new HashMap<String, HashMap<Object, Object>>();
+			    	}
 			    	userList.put(email.getText().toString().replaceAll("\\.", ""), basicUserInfo);
 			    	Main.dataRef.child(USER).setValue(userList);
+			    	
+			    	Intent switchToMain = new Intent(SignUp.this, Main.class);
+			    	startActivity(switchToMain);
 			    }
 			    public void onCancelled(FirebaseError firebaseError) {
 			    }

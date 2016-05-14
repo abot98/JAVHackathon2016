@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
-	Button switchToUsers;
+	Button switchToUsers, logout;
 	
 	public static Firebase dataRef;
 	public static String userID = "";
@@ -50,12 +50,20 @@ import android.widget.TextView;
         
       //Retrieve  button
         switchToUsers = (Button) findViewById(R.id.users);
+        logout = (Button) findViewById(R.id.logoutButton);
         
         //button listener
         switchToUsers.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		Intent userIntent = new Intent(Main.this, UserList.class);
                 startActivity(userIntent);
+            }
+        });
+        
+        //Log out
+        logout.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		dataRef.unauth();
             }
         });
     
