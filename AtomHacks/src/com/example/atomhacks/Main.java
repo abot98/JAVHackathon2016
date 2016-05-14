@@ -1,11 +1,15 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import android.os.Build;
 import android.os.Bundle;
 import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import android.annotation.SuppressLint;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +26,7 @@ import android.widget.TextView;
 	Button switchToUsers, logout, newProject;
 	
 	public static Firebase dataRef;
-	public static String userID = "";
+	public static String userID = "", userName = "";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,20 +79,53 @@ import android.widget.TextView;
     
         final ListView listview = (ListView) findViewById(R.id.listView);
         
-        String[] values = new String[] { "Project 1", "Project 2", "Project 3",
-        		"Project 4", "Project 5", "Project 6","Project 7", "Project 8", 
-        		"Project 9","Project 10", "Project 11", "Project 12","Project 13", 
-        		"Project 14", "Project 15" };
+//      //Get projects
+//        Main.dataRef.child("projects").addValueEventListener(new ValueEventListener() {
+//
+//			@Override
+//			public void onCancelled(FirebaseError arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onDataChange(DataSnapshot arg0) {
+//				try {
+//					HashMap<String, HashMap<Object, Object>> projectList = (HashMap<String, HashMap<Object, Object>>) arg0.getValue();
+//					if(projectList == null) {
+//						createList(new String[]{}, listview);
+//						return;
+//					}
+//					String[] values = new String[projectList.size()];
+//					int i = 0;
+//					System.out.println(projectList);
+//					for (HashMap<Object, Object> map : projectList.values()) {
+//						values[i] = map.get("Name").toString();
+//						i++;
+//					}
+//					createList(values, listview);
+//				}
+//				catch (ClassCastException e) {
+//					createList(new String[]{}, listview);
+//				}
+//			}
+//        	
+//        }); 
 
-        final ArrayList<String> list = new ArrayList<String>();
+        
+    } 
+    
+    public void createList(String[] values, ListView listview) {
+    	final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
              list.add(values[i]);
            }
             
-        final StableArrayAdapter projectAdapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-            listview.setAdapter(projectAdapter);
+        final StableArrayAdapter userAdapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+            listview.setAdapter(userAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
 
 			@SuppressLint("NewApi") //IMPORTANTE SUPPRESSED CUZ LAPTOP IS PMSing
 			@Override
@@ -98,14 +135,14 @@ import android.widget.TextView;
                       @Override
                       public void run() {
                         list.remove(item);
-                        projectAdapter.notifyDataSetChanged();
+                        userAdapter.notifyDataSetChanged();
                         view.setAlpha(1);
                       }
                     });
               }
 
             });
-    } 
+    }
 
 
     @Override

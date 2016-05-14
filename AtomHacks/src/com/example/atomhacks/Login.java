@@ -1,9 +1,13 @@
 package com.example.atomhacks;
 
 
+import java.util.HashMap;
+
 import com.firebase.client.AuthData;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -48,6 +52,25 @@ public class Login extends Activity{
 				    public void onAuthenticated(AuthData authData) {
 				        System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
 				        Main.userID = authData.getUid();
+				        
+				        Main.dataRef.child(Main.userID).addListenerForSingleValueEvent(new ValueEventListener() {
+				            public void onDataChange(DataSnapshot snapshot) {
+				            	HashMap<String, String> userInfo;
+				            	try {
+				            		userInfo = (HashMap<String, String>) snapshot.getValue();
+				            	} catch (ClassCastException e) {
+				            		System.out.println("Data improperly formatted");
+				            		return;
+				            	}
+				            	if(userInfo == null) {
+				            		System.out.println("Data can't be reached");
+				            		return;
+				            	}
+				            	Main.userName = userInfo.get("Name");
+				            }
+				            public void onCancelled(FirebaseError firebaseError) {
+				            }
+				        });
 				        
 						Intent projectList = new Intent(Login.this, Main.class);
 						startActivity(projectList);
