@@ -1,9 +1,13 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
+
 import android.os.Build;
 import android.os.Bundle;
+
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +22,10 @@ import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
-	private static boolean loggedIn = false;
+	Button switchToUsers;
+	
+	public static Firebase dataRef;
+	public static String userID = "";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,47 +34,64 @@ import android.widget.TextView;
         
         Firebase.setAndroidContext(this);
         
-        Intent logIn = new Intent(Main.this, Login.class);
+        dataRef = new Firebase("https://blazing-inferno-7604.firebaseio.com/");
+        
+        final Intent logIn = new Intent(Main.this, Login.class);
         
         //If user isn't signed in, goes to the login screen
-        if (loggedIn == false){
-        	startActivity(logIn);
-        }
+        dataRef.addAuthStateListener(new Firebase.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(AuthData authData) {
+                if (authData == null) {
+                    startActivity(logIn);
+                }
+            }
+        });
         
+      //Retrieve  button
+        switchToUsers = (Button) findViewById(R.id.submitButton);
+        
+        //button listener
+        switchToUsers.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		Intent userIntent = new Intent(Main.this, UserList.class);
+                startActivity(userIntent);
+            }
+        });
+    
         final ListView listview = (ListView) findViewById(R.id.listView);
         
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile" };
+        String[] values = new String[] { "Project 1", "Project 2", "Project 3",
+        		"Project 4", "Project 5", "Project 6","Project 7", "Project 8", 
+        		"Project 9","Project 10", "Project 11", "Project 12","Project 13", 
+        		"Project 14", "Project 15" };
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
              list.add(values[i]);
            }
             
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-            listview.setAdapter(adapter);
+        final StableArrayAdapter projectAdapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+            listview.setAdapter(projectAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
               @Override
-              public void onItemClick(AdapterView<?> parent, final View view,
-                  int position, long id) {
+              public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
                 view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
                       @Override
                       public void run() {
                         list.remove(item);
-                        adapter.notifyDataSetChanged();
+                        projectAdapter.notifyDataSetChanged();
                         view.setAlpha(1);
                       }
                     });
               }
 
             });
-    
+            
+
     
     } 
 
@@ -77,10 +101,5 @@ import android.widget.TextView;
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-    
-    
-    public static void setLogin(boolean status){
-    	loggedIn = status;
     }
 }

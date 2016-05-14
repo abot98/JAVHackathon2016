@@ -1,6 +1,10 @@
 package com.example.atomhacks;
 
 
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,10 +27,8 @@ public class Login extends Activity{
         
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
-	}
-	
-	public void init(){
-		newAccount = (TextView)findViewById(R.id.newAccount);
+        
+        newAccount = (TextView)findViewById(R.id.newAccount);
 		newAccount.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -39,12 +41,22 @@ public class Login extends Activity{
 		
 	    submitLogin = (Button)findViewById(R.id.submitLogin);
 	    submitLogin.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				
-				Intent projectList = new Intent(Login.this, Main.class);
-				startActivity(projectList);
+				Main.dataRef.authWithPassword(email.getText().toString(), password.getText().toString(), new Firebase.AuthResultHandler() {
+				    @Override
+				    public void onAuthenticated(AuthData authData) {
+				        System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
+				        Main.userID = authData.getUid();
+				        
+						Intent projectList = new Intent(Login.this, Main.class);
+						startActivity(projectList);
+				    }
+				    @Override
+				    public void onAuthenticationError(FirebaseError firebaseError) {
+				        System.out.println("Error logging in");
+					}
+				});
 			}
 		});
 	}
