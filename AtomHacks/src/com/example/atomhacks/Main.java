@@ -15,9 +15,6 @@ import android.widget.TextView;
 
 public class Main extends Activity {
 
-	private EditText inputText;
-	private Button sendBtn;
-	
 	private static boolean loggedIn = false;
 	
     @Override
@@ -25,23 +22,7 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        //Establishes firebase (server)
-        Firebase.setAndroidContext(this);
-        
-        //Database class for server comms
-        final DatabaseInterface databaseInterface = new DatabaseInterface();
-        
-        inputText = (EditText) findViewById(R.id.editText1);
-        sendBtn = (Button) findViewById(R.id.button1);
-        //Sends simple info to server
-        sendBtn.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-					databaseInterface.sendMessage(inputText.getText().toString());	
-					inputText.setText("");
-			}
-		});
+       
         
         Intent logIn = new Intent(Main.this, Login.class);
         
