@@ -1,10 +1,14 @@
 package com.example.atomhacks;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.firebase.client.*;
 
 public class DatabaseInterface {
 	
-	private Firebase dataRef;
+	public static Firebase dataRef;
+	private HashMap<Integer, String> projectList, userList;  //<ID, Description>
 	
 	public DatabaseInterface() {
 		dataRef = new Firebase("https://blazing-inferno-7604.firebaseio.com/");
@@ -22,8 +26,10 @@ public class DatabaseInterface {
 		});
 	}
 	
-	//Send a message to the server
-	public void sendMessage(String message) {
-		dataRef.push().setValue(message);
+	//Get list of project names
+	public String[] getProjectNamesList() {
+		return (String[]) projectList.values().toArray();
 	}
+	
+	//Get list of user descriptors
 }

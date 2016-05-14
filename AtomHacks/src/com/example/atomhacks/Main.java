@@ -22,7 +22,7 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-       
+        Firebase.setAndroidContext(this);
         
         Intent logIn = new Intent(Main.this, Login.class);
         
