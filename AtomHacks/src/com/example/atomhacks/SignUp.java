@@ -22,9 +22,6 @@ public class SignUp extends Activity{
 	//Submit button
 	private Button submitButton;
 	
-	//Firebase reference
-	private Firebase dataRef;
-	
 	//Constant references
 	private static final String USER = "users";
 	
@@ -32,9 +29,6 @@ public class SignUp extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-        
-        //Set up data reference for Firebase
-        dataRef = new Firebase("https://blazing-inferno-7604.firebaseio.com/");
         
         //Retrieve inputs from layout
         firstName = (EditText) findViewById(R.id.firstNameInput);
@@ -67,7 +61,7 @@ public class SignUp extends Activity{
 	//Create the user in firebase
 	public void createUser() {
 		//Create the user
-		dataRef.createUser(email.getText().toString(), password.getText().toString(),
+		Main.dataRef.createUser(email.getText().toString(), password.getText().toString(),
 				new Firebase.ValueResultHandler<Map<String, Object>>() {
 		    @Override
 		    public void onSuccess(Map<String, Object> result) {
@@ -90,10 +84,10 @@ public class SignUp extends Activity{
 			userData.put("description", description.getText().toString());
 			userData.put("projects", new HashMap<String, String>());
 			// Save Map
-			dataRef.child(userID).setValue(userData);
+			Main.dataRef.child(userID).setValue(userData);
 			
 			//Get current user list and append new user's name and id
-			dataRef.child(USER).addListenerForSingleValueEvent(new ValueEventListener() {
+			Main.dataRef.child(USER).addListenerForSingleValueEvent(new ValueEventListener() {
 			    public void onDataChange(DataSnapshot snapshot) {
 			    	HashMap<String, String> userList;
 			    	try {
@@ -102,7 +96,7 @@ public class SignUp extends Activity{
 			    		userList = new HashMap<String, String>();
 			    	}
 			    	userList.put(email.getText().toString().replaceAll("\\.", ""), userID);
-			    	dataRef.child(USER).setValue(userList);
+			    	Main.dataRef.child(USER).setValue(userList);
 			    }
 			    public void onCancelled(FirebaseError firebaseError) {
 			    }
