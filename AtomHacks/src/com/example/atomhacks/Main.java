@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 
 import android.annotation.TargetApi;
@@ -21,8 +22,10 @@ import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
-	private static boolean loggedIn = true;
 	Button switchToUsers;
+	
+	public static Firebase dataRef;
+	public static String userID = "";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +34,19 @@ import android.widget.TextView;
         
         Firebase.setAndroidContext(this);
         
-        Intent logIn = new Intent(Main.this, Login.class);
+        dataRef = new Firebase("https://blazing-inferno-7604.firebaseio.com/");
+        
+        final Intent logIn = new Intent(Main.this, Login.class);
         
         //If user isn't signed in, goes to the login screen
-        if (loggedIn == false){
-        	startActivity(logIn);
-        }
+        dataRef.addAuthStateListener(new Firebase.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(AuthData authData) {
+                if (authData == null) {
+                    startActivity(logIn);
+                }
+            }
+        });
         
       //Retrieve  button
         switchToUsers = (Button) findViewById(R.id.submitButton);
@@ -91,10 +101,5 @@ import android.widget.TextView;
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-    
-    
-    public static void setLogin(boolean status){
-    	loggedIn = status;
     }
 }
