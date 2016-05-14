@@ -1,9 +1,12 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
+
 import android.os.Build;
 import android.os.Bundle;
+
 import com.firebase.client.Firebase;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +21,8 @@ import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
-	private static boolean loggedIn = false;
+	private static boolean loggedIn = true;
+	Button switchToUsers;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,40 +38,50 @@ import android.widget.TextView;
         	startActivity(logIn);
         }
         
+      //Retrieve  button
+        switchToUsers = (Button) findViewById(R.id.submitButton);
+        
+        //button listener
+        switchToUsers.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		Intent userIntent = new Intent(Main.this, UserList.class);
+                startActivity(userIntent);
+            }
+        });
+    
         final ListView listview = (ListView) findViewById(R.id.listView);
         
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile" };
+        String[] values = new String[] { "Project 1", "Project 2", "Project 3",
+        		"Project 4", "Project 5", "Project 6","Project 7", "Project 8", 
+        		"Project 9","Project 10", "Project 11", "Project 12","Project 13", 
+        		"Project 14", "Project 15" };
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
              list.add(values[i]);
            }
             
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-            listview.setAdapter(adapter);
+        final StableArrayAdapter projectAdapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+            listview.setAdapter(projectAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
               @Override
-              public void onItemClick(AdapterView<?> parent, final View view,
-                  int position, long id) {
+              public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
                 view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
                       @Override
                       public void run() {
                         list.remove(item);
-                        adapter.notifyDataSetChanged();
+                        projectAdapter.notifyDataSetChanged();
                         view.setAlpha(1);
                       }
                     });
               }
 
             });
-    
+            
+
     
     } 
 
