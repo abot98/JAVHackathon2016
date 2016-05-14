@@ -1,13 +1,11 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
-
 import android.os.Build;
 import android.os.Bundle;
-
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -92,7 +90,8 @@ import android.widget.TextView;
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-              @Override
+              @SuppressLint("NewApi")
+			@Override
               public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
                 view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
@@ -106,9 +105,6 @@ import android.widget.TextView;
               }
 
             });
-            
-
-    
     } 
 
 

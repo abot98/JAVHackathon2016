@@ -58,7 +58,7 @@
         android:layout_below="@+id/skillRequest"
         android:layout_marginRight="17dp"
         android:layout_marginTop="40dp"
-        android:onClick="addToUserInfo"
+        android:onClick="sendInfo"
         android:text="Submit" />
 
 </RelativeLayout>

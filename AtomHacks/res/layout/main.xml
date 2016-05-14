@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,6 +26,7 @@
         android:layout_alignParentTop="true"
         android:text="Users" />
 
+<<<<<<< HEAD
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
@@ -41,4 +43,12 @@
         android:layout_below="@+id/logoutButton"
         android:text="Button" />
 
+=======
+<Button
+    android:id="@+id/logoutButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Log Out" />
+
+>>>>>>> 0a9afc7f26c56603bee34901810a3a029c4732e8
 </RelativeLayout>
