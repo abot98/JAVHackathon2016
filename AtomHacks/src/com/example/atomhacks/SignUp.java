@@ -84,19 +84,24 @@ public class SignUp extends Activity{
 			userData.put("email", email.getText().toString());
 			userData.put("description", description.getText().toString());
 			userData.put("projects", new HashMap<String, String>());
+			
 			// Save Map
 			Main.dataRef.child(userID).setValue(userData);
 			
 			//Get current user list and append new user's name and id
+			final HashMap<Object, Object> basicUserInfo = new HashMap<Object, Object>();
+			basicUserInfo.put("User ID", userID);
+			basicUserInfo.put("First Name", firstName.getText().toString());
+			basicUserInfo.put("Last Name", lastName.getText().toString());
 			Main.dataRef.child(USER).addListenerForSingleValueEvent(new ValueEventListener() {
 			    public void onDataChange(DataSnapshot snapshot) {
-			    	HashMap<String, String> userList;
+			    	HashMap<String, HashMap<Object, Object>> userList;
 			    	try {
-			    		userList = (HashMap<String, String>) snapshot.getValue();
+			    		userList = (HashMap<String, HashMap<Object, Object>>) snapshot.getValue();
 			    	} catch (ClassCastException e) {
-			    		userList = new HashMap<String, String>();
+			    		userList = new HashMap<String, HashMap<Object, Object>>();
 			    	}
-			    	userList.put(email.getText().toString().replaceAll("\\.", ""), userID);
+			    	userList.put(email.getText().toString().replaceAll("\\.", ""), basicUserInfo);
 			    	Main.dataRef.child(USER).setValue(userList);
 			    }
 			    public void onCancelled(FirebaseError firebaseError) {
