@@ -22,6 +22,7 @@ import android.widget.TextView;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
 	Button switchToUsers;
+	Button UserSettings;
 	
 	public static Firebase dataRef;
 	public static String userID = "";
@@ -49,12 +50,20 @@ import android.widget.TextView;
         
       //Retrieve  button
         switchToUsers = (Button) findViewById(R.id.users);
+        UserSettings = (Button)findViewById(R.id.userSettings); 
         
         //button listener
         switchToUsers.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		Intent userIntent = new Intent(Main.this, UserList.class);
                 startActivity(userIntent);
+            }
+        });
+        
+        UserSettings.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		Intent toUserSettings = new Intent(Main.this, UserSettings.class);
+                startActivity(toUserSettings);
             }
         });
     

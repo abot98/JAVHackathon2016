@@ -8,7 +8,6 @@ import android.widget.Button;
 
 public class UserSettings extends Activity {
 	Intent toProjectSettings;
-	Button btn1;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +18,7 @@ public class UserSettings extends Activity {
 	
 	//Goes to Project Settings xml when button clicked. 
 	public void toProjectSettings(View v){
-		toProjectSettings = new Intent(this, ProjectSettings.class);  
-		startActivity(toProjectSettings); 
-		
+		toProjectSettings = new Intent(UserSettings.this, ProjectSettings.class);  
+		startActivity(toProjectSettings); 	
 	}
 }

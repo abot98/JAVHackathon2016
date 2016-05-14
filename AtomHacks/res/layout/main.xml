@@ -25,4 +25,13 @@
         android:layout_alignParentTop="true"
         android:text="Users" />
 
+    <Button
+        android:id="@+id/userSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize= "14sp"
+        android:layout_alignRight="@+id/listView"
+        android:layout_below="@+id/users"
+        android:text="User Settings" />
+
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class ProjectSettings extends Activity {
@@ -17,16 +18,26 @@ public class ProjectSettings extends Activity {
 	EditText projName; 
 	EditText projDescription;
 	EditText skillRequest;
+	Button btn1; 
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.project_settings); 
+        
+        /*btn1 = (Button)findViewById(R.id.submit); 
+        btn1.setOnClickListener( new View.OnClickListener() {
+	        	public void onClick(View v) {
+	        		Intent toUserInfo = new Intent(ProjectSettings.this, UserInfo.class);
+	                startActivity(toUserInfo);
+	            }
+	        }); */
     }
 	
 	//Adds and displays new project in User Info when button clicked. 
 	public void sendInfo() {
-		toUserInfo = new Intent(this, UserInfo.class); 
+		toUserInfo = new Intent(ProjectSettings.this, UserInfo.class); 
+		
 		projName= (EditText)findViewById(R.id.projectName); 
 		projDescription= (EditText)findViewById(R.id.projDescription); 
 		skillRequest= (EditText)findViewById(R.id.skillRequest); 
