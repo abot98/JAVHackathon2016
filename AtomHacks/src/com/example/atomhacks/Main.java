@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
-	Button switchToUsers, logout;
+	Button switchToUsers, logout, newProject;
 	
 	public static Firebase dataRef;
 	public static String userID = "";
@@ -50,6 +50,7 @@ import android.widget.TextView;
       //Retrieve  button
         switchToUsers = (Button) findViewById(R.id.users);
         logout = (Button) findViewById(R.id.logoutButton);
+        newProject = (Button) findViewById(R.id.newProjectButton);
         
         //button listener
         switchToUsers.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +64,14 @@ import android.widget.TextView;
         logout.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		dataRef.unauth();
+            }
+        });
+        
+        //New project
+        newProject.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View v) {
+        		Intent newProject = new Intent(Main.this, ProjectSettings.class);
+        		startActivity(newProject);
             }
         });
     

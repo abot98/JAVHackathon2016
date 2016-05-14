@@ -33,4 +33,12 @@
         android:layout_below="@+id/users"
         android:text="Log Out" />
 
+    <Button
+        android:id="@+id/newProjectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/listView"
+        android:layout_below="@+id/logoutButton"
+        android:text="Button" />
+
 </RelativeLayout>

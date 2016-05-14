@@ -1,5 +1,11 @@
 package com.example.atomhacks;
 
+import java.util.HashMap;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,22 +28,25 @@ public class UserInfo extends Activity {
         description= getInfo.getStringExtra(ProjectSettings.DESCRIPTION); 
         skills= getInfo.getStringExtra(ProjectSettings.SKILL); 
         
-        setAllText(message, description, skills); 
-        layout=(RelativeLayout)findViewById(R.id.content); 
-        layout.addView(line1); 
-        layout.addView(line2); 
-        layout.addView(line3);
+        Main.dataRef.child(Main.userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(DataSnapshot snapshot) {
+            	HashMap<String, String> userInfo;
+            	try {
+            		userInfo = (HashMap<String, String>) snapshot.getValue();
+            	} catch (ClassCastException e) {
+            		userInfo = new HashMap<String, String>();
+            	}
+            	if(userInfo == null) userInfo = new HashMap<String, String>();
+            	
+            	//Fill in the info (first name, last name, etc here)
+            	
+            }
+
+			@Override
+			public void onCancelled(FirebaseError arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
     }
-	
-	public void setAllText(String s1, String s2, String s3){
-		line1 = new TextView(this); 
-		line2 = new TextView(this); 
-		line3 = new TextView(this); 
-		
-		line1.setText(s1); 
-		line2.setText(s2); 
-		line3.setText(s3); 
-	}
-	
-	//NEED TO ADD METHOD SO THAT A NEW PROJECT OBJECT IS ADDED TO PROJECTLIST. s
 }
