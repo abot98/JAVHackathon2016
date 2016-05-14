@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Login extends Activity implements OnClickListener{
+public class Login extends Activity{
 	
 	TextView newAccount;
 	Button submitLogin;
@@ -23,28 +23,28 @@ public class Login extends Activity implements OnClickListener{
 	
 	public void init(){
 		newAccount = (TextView)findViewById(R.id.newAccount);
-		newAccount.setOnClickListener(this);
+		newAccount.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent signUp = new Intent(Login.this, SignUp.class);
+				startActivity(signUp);
+			}
+		});
 		
 	    submitLogin = (Button)findViewById(R.id.submitLogin);
-	    submitLogin.setOnClickListener(this);
+	    submitLogin.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Main.setLogin(true);
+				Intent projectList = new Intent(Login.this, Main.class);
+				startActivity(projectList);
+			}
+		});
 	}
 
-	@Override
-	public void onClick(View view) {
-		// TODO Auto-generated method stub
-		
-		
-		if(view.getId()== submitLogin.getId()){
-			Main.setLogin(true);
-			Intent projectList = new Intent(Login.this, Main.class);
-			startActivity(projectList);
-		}
-		
-		if(view.getId()== newAccount.getId()){
-			Intent signUp = new Intent(Login.this, SignUp.class);
-			startActivity(signUp);
-		}
-		
-	}
     
 }

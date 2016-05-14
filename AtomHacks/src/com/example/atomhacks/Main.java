@@ -46,10 +46,10 @@ public class Main extends Activity {
         Intent logIn = new Intent(Main.this, Login.class);
         
         //If user isn't signed in, goes to the login screen
-        if (loggedIn = false){
+        if (loggedIn == false){
         	startActivity(logIn);
         }
-    }
+    } 
 
 
     @Override

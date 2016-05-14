@@ -25,6 +25,10 @@
         </activity>
         <activity android:name="Login"></activity>
         <activity android:name="SignUp"></activity>
+        <activity android:name="ProjectInfo"></activity>
+        <activity android:name="ProjectSettings"></activity>
+        <activity android:name="UserInfo"></activity>
+        <activity android:name="UserSettings"></activity>
     </application>
 
 </manifest>
