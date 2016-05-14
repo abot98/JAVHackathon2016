@@ -1,13 +1,11 @@
 package com.example.atomhacks;
 
 import java.util.ArrayList;
-
 import android.os.Build;
 import android.os.Bundle;
-
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +21,7 @@ import android.widget.TextView;
 
 	Button switchToUsers;
 	Button UserSettings;
+	Button logout;
 	
 	public static Firebase dataRef;
 	public static String userID = "";
@@ -50,7 +49,7 @@ import android.widget.TextView;
         
       //Retrieve  button
         switchToUsers = (Button) findViewById(R.id.users);
-        UserSettings = (Button)findViewById(R.id.userSettings); 
+        logout = (Button) findViewById(R.id.logoutButton);
         
         //button listener
         switchToUsers.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +59,10 @@ import android.widget.TextView;
             }
         });
         
-        UserSettings.setOnClickListener(new View.OnClickListener() {
+        //Log out
+        logout.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		Intent toUserSettings = new Intent(Main.this, UserSettings.class);
-                startActivity(toUserSettings);
+        		dataRef.unauth();
             }
         });
     
@@ -84,7 +83,8 @@ import android.widget.TextView;
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-              @Override
+              @SuppressLint("NewApi")
+			@Override
               public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
                 view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
@@ -98,9 +98,6 @@ import android.widget.TextView;
               }
 
             });
-            
-
-    
     } 
 
 

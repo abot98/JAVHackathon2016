@@ -52,18 +52,33 @@ import android.widget.ListView;
 
 				@Override
 				public void onDataChange(DataSnapshot arg0) {
-					HashMap<String, HashMap<Object, Object>> userList;
 					try {
 						HashMap<String, HashMap<Object, Object>> userList = (HashMap<String, HashMap<Object, Object>>) arg0.getValue();
+						if(userList == null) {
+							createList(new String[]{}, listview);
+							return;
+						}
+						String[] values = new String[userList.size()];
+						int i = 0;
+						System.out.println(userList);
+						for (HashMap<Object, Object> map : userList.values()) {
+							values[i] = map.get("Name").toString();
+							i++;
+						}
+						createList(values, listview);
 					}
 					catch (ClassCastException e) {
-						
+						createList(new String[]{}, listview);
 					}
 				}
 	        	
-	        });
+	        });       
 
-	        final ArrayList<String> list = new ArrayList<String>();
+	    
+	    } 
+	    
+	    public void createList(String[] values, ListView listview) {
+	    	final ArrayList<String> list = new ArrayList<String>();
 	        for (int i = 0; i < values.length; ++i) {
 	             list.add(values[i]);
 	           }
@@ -87,9 +102,6 @@ import android.widget.ListView;
 	              }
 
 	            });
-	            
-
-	    
-	    } 
+	    }
 
 }
