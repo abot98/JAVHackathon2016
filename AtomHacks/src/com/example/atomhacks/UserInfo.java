@@ -38,4 +38,6 @@ public class UserInfo extends Activity {
 		line2.setText(s2); 
 		line3.setText(s3); 
 	}
+	
+	//NEED TO ADD METHOD SO THAT A NEW PROJECT OBJECT IS ADDED TO PROJECTLIST. s
 }
