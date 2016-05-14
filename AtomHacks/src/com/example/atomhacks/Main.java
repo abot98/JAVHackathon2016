@@ -10,11 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+//import com.google.android.gms.auth.signin.GoogleSignInOptions.Builder;
 
 public class Main extends Activity {
 
 	private EditText inputText;
 	private Button sendBtn;
+	
+	private static boolean loggedIn = false;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,13 @@ public class Main extends Activity {
 					inputText.setText("");
 			}
 		});
+        
+        Intent logIn = new Intent(Main.this, Login.class);
+        
+        //If user isn't signed in, goes to the login screen
+        if (loggedIn = false){
+        	startActivity(logIn);
+        }
     }
 
 
@@ -48,4 +58,8 @@ public class Main extends Activity {
         return true;
     }
     
+    
+    public static void setLogin(boolean status){
+    	loggedIn = status;
+    }
 }
