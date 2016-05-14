@@ -109,4 +109,3 @@ public class SignUp extends Activity{
 			});
 	}
 }
->>>>>>> 14d4bd7c7ce22a9fdd441f9a0028d110316ead8d

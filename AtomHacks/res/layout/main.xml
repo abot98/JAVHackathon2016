@@ -8,17 +8,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Main" >
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView1"
-        android:layout_width="fill_parent"
-        android:layout_height="160dp" >
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" >
+    </ListView>
 
-        <LinearLayout
-            android:id="@+id/lists"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:orientation="horizontal" >
-        </LinearLayout>
-    </HorizontalScrollView>
+    <Button
+        android:id="@+id/users"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Users" />
 
 </RelativeLayout>
