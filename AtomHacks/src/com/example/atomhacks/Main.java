@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-//import com.google.android.gms.auth.signin.GoogleSignInOptions.Builder;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1) public class Main extends Activity {
 
