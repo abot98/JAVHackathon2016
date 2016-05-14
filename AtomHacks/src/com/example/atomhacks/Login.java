@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Login extends Activity{
 	
 	TextView newAccount;
+	private EditText email, password;
 	Button submitLogin;
 	
 	@Override
@@ -19,6 +21,8 @@ public class Login extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         
+        email = (EditText) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
 	}
 	
 	public void init(){
@@ -38,8 +42,7 @@ public class Login extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Main.setLogin(true);
+				
 				Intent projectList = new Intent(Login.this, Main.class);
 				startActivity(projectList);
 			}
